@@ -55,11 +55,9 @@ export function GiftList({ giftAccounts, weddingId }: GiftListProps) {
     <div className="space-y-4">
       <div className="flex justify-end">
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-pink-500 hover:bg-pink-600">
-              <Plus className="mr-2 h-4 w-4" />
-              Tambah Rekening
-            </Button>
+          <DialogTrigger render={<Button className="bg-pink-500 hover:bg-pink-600" />}>
+            <Plus className="mr-2 h-4 w-4" />
+            Tambah Rekening
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
