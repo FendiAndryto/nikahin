@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Plus, Heart, Calendar, ExternalLink, Pencil, Trash2 } from "lucide-react";
+import { Plus, Heart, Calendar, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getWeddings } from "./actions";
 import { DeleteWeddingButton } from "./delete-button";
+import { SlugLink } from "./slug-link";
 
 export const metadata: Metadata = {
   title: "Acara Pernikahan - Nikahin",
@@ -92,10 +93,7 @@ export default async function WeddingsPage() {
                 </div>
 
                 {/* Slug Link */}
-                <div className="mt-3 flex items-center gap-1.5 rounded-lg bg-muted/50 px-3 py-2 text-xs text-muted-foreground">
-                  <ExternalLink className="h-3 w-3 shrink-0" />
-                  <span className="truncate">nikahin.com/{wedding.slug}</span>
-                </div>
+                <SlugLink slug={wedding.slug} />
 
                 {/* Actions */}
                 <div className="mt-4 flex gap-2">
