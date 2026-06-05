@@ -19,7 +19,7 @@ export const weddingFormSchema = z.object({
   eventDate: z.date().optional().nullable(),
   themeId: z.string().optional(),
   coverImageUrl: z.string().optional(),
-  galleryUrls: z.array(z.string()).optional().default([]),
+  galleryUrls: z.array(z.string()),
   groomPhotoUrl: z.string().optional(),
   bridePhotoUrl: z.string().optional(),
   musicUrl: z.string().optional(),
