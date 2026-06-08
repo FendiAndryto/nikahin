@@ -207,7 +207,7 @@ export function InvitationContent({
                     initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.5, type: "spring" }}
                     className="inline-block font-serif italic text-3xl sm:text-4xl text-[#8B5E5E]"
                   >
-                    &amp;
+                    {"&"}
                   </motion.span>
                   <StaggerText text={wedding.bride_name} className="font-serif text-4xl sm:text-5xl lg:text-5xl text-[#333] mt-3 sm:mb-4 drop-shadow-sm whitespace-nowrap" delay={1} />
                 </div>
@@ -575,14 +575,16 @@ export function InvitationContent({
           <div className="relative z-10">
             <ElegantDivider />
             <p className="font-serif text-2xl sm:text-3xl mb-3 sm:mb-4 mt-6 sm:mt-8 italic text-[#8B5E5E]">
-              {wedding.groom_name} &amp; {wedding.bride_name}
+              {wedding.groom_name} {"&"} {wedding.bride_name}
             </p>
             <p className="text-[10px] sm:text-xs text-[#666] tracking-widest uppercase mb-8 sm:mb-12">
               Terima Kasih
             </p>
 
             <p className="text-[10px] sm:text-xs text-[#333]/50 tracking-widest uppercase">
-              Dibuat dengan <Heart className="inline h-3 w-3 text-[#8B5E5E] fill-[#8B5E5E] mx-1" /> menggunakan Nikahin
+              Dibuat dengan{" "}
+              <Heart className="inline h-3 w-3 text-[#8B5E5E] fill-[#8B5E5E] mx-1" />
+              {" "}menggunakan Nikahin
             </p>
           </div>
         </footer>
