@@ -184,16 +184,16 @@ export function InvitationContent({
               <GlowingOrb position="bottom-right" className="!w-[500px] !h-[500px] !opacity-30 mix-blend-normal" />
 
               
-              <div className="relative w-full max-w-sm sm:max-w-md h-[80vh] sm:h-[85vh]">
+              <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-3xl h-[85vh] sm:h-[90vh]">
                 {/* Clean Arch Frame without Florals */}
-                <div className="absolute inset-4 sm:inset-6 border-[1px] border-[#8B5E5E]/20 rounded-t-full shadow-inner bg-white/20 backdrop-blur-[2px]" />
-                <div className="absolute inset-6 sm:inset-8 border-[0.5px] border-[#8B5E5E]/10 rounded-t-full" />
+                <div className="absolute inset-4 sm:inset-6 border-[1px] border-[#8B5E5E]/20 rounded-t-[150px] sm:rounded-t-[250px] lg:rounded-t-[300px] shadow-inner bg-white/20 backdrop-blur-[2px]" />
+                <div className="absolute inset-6 sm:inset-8 border-[0.5px] border-[#8B5E5E]/10 rounded-t-[150px] sm:rounded-t-[250px] lg:rounded-t-[300px]" />
               </div>
             </div>
 
-            <div className="relative z-10 w-full max-w-sm sm:max-w-md px-6 py-12 flex flex-col items-center justify-between min-h-screen">
+            <div className="relative z-10 w-full max-w-sm sm:max-w-md lg:max-w-3xl px-8 sm:px-12 pt-16 sm:pt-20 pb-12 sm:pb-16 flex flex-col items-center justify-between h-[85vh] sm:h-[90vh]">
               <FadeUp>
-                <div className="text-center mt-24 sm:mt-32 relative">
+                <div className="text-center relative">
                   <motion.p 
                     initial={{ opacity: 0, letterSpacing: "0em" }}
                     animate={{ opacity: 1, letterSpacing: "0.3em" }}
@@ -202,21 +202,21 @@ export function InvitationContent({
                   >
                     The Wedding Of
                   </motion.p>
-                  <StaggerText text={wedding.groom_name} className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#333] mb-3 sm:mb-4 drop-shadow-sm" delay={0.5} />
+                  <StaggerText text={wedding.groom_name} className="font-serif text-4xl sm:text-5xl lg:text-5xl text-[#333] mb-3 sm:mb-4 drop-shadow-sm whitespace-nowrap" delay={0.5} />
                   <motion.span 
                     initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.5, type: "spring" }}
                     className="inline-block font-serif italic text-3xl sm:text-4xl text-[#8B5E5E]"
                   >
                     &amp;
                   </motion.span>
-                  <StaggerText text={wedding.bride_name} className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#333] mt-3 sm:mb-4 drop-shadow-sm" delay={1} />
+                  <StaggerText text={wedding.bride_name} className="font-serif text-4xl sm:text-5xl lg:text-5xl text-[#333] mt-3 sm:mb-4 drop-shadow-sm whitespace-nowrap" delay={1} />
                 </div>
               </FadeUp>
 
               <FadeUp delay={1.8}>
-                <div className="text-center mt-10 sm:mt-12 mb-8 w-full flex flex-col items-center">
+                <div className="text-center w-full flex flex-col items-center">
                   {guest && (
-                    <div className="mb-8 sm:mb-10 p-5 sm:p-8 rounded-[2rem] bg-white/40 backdrop-blur-xl shadow-2xl border border-white/60 relative overflow-hidden transform hover:scale-105 transition-transform duration-500">
+                    <div className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-[2rem] bg-white/40 backdrop-blur-xl shadow-2xl border border-white/60 relative overflow-hidden transform hover:scale-105 transition-transform duration-500">
                       <GlowingOrb position="top-left" className="!opacity-50" />
                       <GlowingOrb position="bottom-right" className="!opacity-50" />
                       <p className="text-[10px] sm:text-xs text-[#8B5E5E] uppercase tracking-[0.3em] mb-3 font-semibold relative z-10">
