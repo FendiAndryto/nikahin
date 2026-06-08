@@ -22,6 +22,7 @@ import { id } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -65,6 +66,15 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
       groomPhotoUrl: wedding?.groom_photo_url || "",
       bridePhotoUrl: wedding?.bride_photo_url || "",
       musicUrl: wedding?.music_url || "",
+      quote: wedding?.quote || "",
+      groomParents: wedding?.groom_parents || "",
+      brideParents: wedding?.bride_parents || "",
+      akadTime: wedding?.akad_time || "",
+      akadLocation: wedding?.akad_location || "",
+      akadAddress: wedding?.akad_address || "",
+      resepsiTime: wedding?.resepsi_time || "",
+      resepsiLocation: wedding?.resepsi_location || "",
+      resepsiAddress: wedding?.resepsi_address || "",
     },
   });
 
@@ -253,6 +263,35 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
               </div>
             </div>
 
+            {/* Parents Details */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="groomParents">Nama Orang Tua Pria</Label>
+                <div className="relative">
+                  <Input
+                    id="groomParents"
+                    placeholder="Contoh: Bapak Fulan & Ibu Fulanah"
+                    className="h-11"
+                    disabled={isSubmitting}
+                    {...register("groomParents")}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="brideParents">Nama Orang Tua Wanita</Label>
+                <div className="relative">
+                  <Input
+                    id="brideParents"
+                    placeholder="Contoh: Bapak Fulan & Ibu Fulanah"
+                    className="h-11"
+                    disabled={isSubmitting}
+                    {...register("brideParents")}
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Slug */}
             <div className="space-y-2">
               <Label htmlFor="slug">Slug URL</Label>
@@ -322,6 +361,90 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
                   {errors.eventDate.message}
                 </p>
               )}
+            </div>
+
+            {/* Event Details (Akad & Resepsi) */}
+            <div className="grid gap-4 sm:grid-cols-2 pt-4 border-t">
+              <div className="space-y-4">
+                <h4 className="font-medium text-pink-600">Detail Akad Nikah</h4>
+                <div className="space-y-2">
+                  <Label htmlFor="akadTime">Waktu Akad</Label>
+                  <Input
+                    id="akadTime"
+                    placeholder="Contoh: 08:00 WIB - Selesai"
+                    className="h-11"
+                    disabled={isSubmitting}
+                    {...register("akadTime")}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="akadLocation">Nama Lokasi Akad</Label>
+                  <Input
+                    id="akadLocation"
+                    placeholder="Contoh: Kediaman Mempelai Wanita"
+                    className="h-11"
+                    disabled={isSubmitting}
+                    {...register("akadLocation")}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="akadAddress">Alamat Lengkap Akad</Label>
+                  <Textarea
+                    id="akadAddress"
+                    placeholder="Contoh: Jl. Contoh Alamat No. 123, Jakarta Selatan"
+                    className="min-h-[80px]"
+                    disabled={isSubmitting}
+                    {...register("akadAddress")}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="font-medium text-pink-600">Detail Resepsi</h4>
+                <div className="space-y-2">
+                  <Label htmlFor="resepsiTime">Waktu Resepsi</Label>
+                  <Input
+                    id="resepsiTime"
+                    placeholder="Contoh: 11:00 WIB - Selesai"
+                    className="h-11"
+                    disabled={isSubmitting}
+                    {...register("resepsiTime")}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="resepsiLocation">Nama Lokasi Resepsi</Label>
+                  <Input
+                    id="resepsiLocation"
+                    placeholder="Contoh: Gedung Pertemuan Utama"
+                    className="h-11"
+                    disabled={isSubmitting}
+                    {...register("resepsiLocation")}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="resepsiAddress">Alamat Lengkap Resepsi</Label>
+                  <Textarea
+                    id="resepsiAddress"
+                    placeholder="Contoh: Jl. Contoh Alamat No. 123, Jakarta Selatan"
+                    className="min-h-[80px]"
+                    disabled={isSubmitting}
+                    {...register("resepsiAddress")}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Quote Detail */}
+            <div className="space-y-2 pt-4 border-t">
+              <Label htmlFor="quote">Quotes Pernikahan (Opsional)</Label>
+              <Textarea
+                id="quote"
+                placeholder="Contoh: Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu... (QS. Ar-Rum: 21)"
+                className="min-h-[100px]"
+                disabled={isSubmitting}
+                {...register("quote")}
+              />
+              <p className="text-xs text-muted-foreground">Kata-kata mutiara atau kutipan ayat suci yang akan ditampilkan di undangan.</p>
             </div>
 
             {/* Upload Foto Sampul */}

@@ -41,7 +41,7 @@ function FloralDivider() {
   return (
     <div className="flex justify-center mt-4 sm:mt-6">
       <div className="w-28 h-10 sm:w-40 sm:h-12 relative opacity-80">
-        <Image src="/images/floral-divider-transparent.png" alt="" fill className="object-contain" />
+        <Image src="/images/floral-divider-transparent.png" alt="" fill sizes="(max-width: 640px) 112px, 160px" className="object-contain" />
       </div>
     </div>
   );
@@ -63,7 +63,7 @@ function FloralCorner({
   };
   return (
     <div className={`absolute w-20 h-20 sm:w-32 sm:h-32 lg:w-40 lg:h-40 opacity-40 sm:opacity-50 lg:opacity-60 pointer-events-none ${positionClasses[position]} ${className}`}>
-      <Image src="/images/floral-corner-transparent.png" alt="" fill className="object-contain" />
+      <Image src="/images/floral-corner-transparent.png" alt="" fill sizes="(max-width: 640px) 80px, (max-width: 1024px) 128px, 160px" priority className="object-contain" />
     </div>
   );
 }
@@ -208,6 +208,7 @@ export function InvitationContent({
             src={wedding.cover_image_url || "/images/prewed-hero.png"}
             alt="Prewedding Hero"
             fill
+            sizes="100vw"
             className="object-cover object-center"
             priority
           />
@@ -241,11 +242,8 @@ export function InvitationContent({
           <FadeUp>
             <div className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto">
               <FloralDivider />
-              <p className="font-serif text-base sm:text-lg lg:text-xl text-[#666] leading-relaxed italic mt-6 sm:mt-8">
-                &quot;Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya.&quot;
-              </p>
-              <p className="mt-4 sm:mt-6 text-xs sm:text-sm tracking-widest text-[#8B5E5E] font-medium uppercase">
-                QS. Ar-Rum: 21
+              <p className="font-serif text-base sm:text-lg lg:text-xl text-[#666] leading-relaxed italic mt-6 sm:mt-8 whitespace-pre-wrap">
+                "{wedding.quote || "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya. (QS. Ar-Rum: 21)"}"
               </p>
             </div>
           </FadeUp>
@@ -277,13 +275,13 @@ export function InvitationContent({
                   <FloralCorner position="bottom-right" className="!-bottom-4 !-right-6 sm:!-bottom-6 sm:!-right-10 !w-16 !h-16 sm:!w-24 sm:!h-24 !opacity-70 z-20 !rotate-0" />
 
                   <div className="w-40 h-60 sm:w-52 sm:h-[320px] relative rounded-full overflow-hidden border-[6px] sm:border-8 border-white shadow-xl z-10">
-                    <Image src={wedding.groom_photo_url || "/images/prewed-groom.png"} alt={wedding.groom_name} fill className="object-cover" />
+                    <Image src={wedding.groom_photo_url || "/images/prewed-groom.png"} alt={wedding.groom_name} fill sizes="(max-width: 640px) 160px, 208px" className="object-cover" />
                   </div>
                 </div>
                 <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#333] mb-2 relative z-20">{wedding.groom_name}</h3>
                 <p className="text-[#8B5E5E] text-[10px] sm:text-xs tracking-widest uppercase mb-2 sm:mb-3">Putra Dari</p>
                 <p className="text-[#666] font-serif text-sm sm:text-base lg:text-lg italic max-w-xs">
-                  Bapak Fulan &amp; Ibu Fulanah
+                  {wedding.groom_parents || "Bapak Fulan & Ibu Fulanah"}
                 </p>
               </div>
             </FadeUp>
@@ -306,13 +304,13 @@ export function InvitationContent({
                   <FloralCorner position="bottom-left" className="!-bottom-4 !-left-6 sm:!-bottom-6 sm:!-left-10 !w-16 !h-16 sm:!w-24 sm:!h-24 !opacity-70 z-20 !-rotate-0" />
 
                   <div className="w-40 h-60 sm:w-52 sm:h-[320px] relative rounded-full overflow-hidden border-[6px] sm:border-8 border-white shadow-xl z-10">
-                    <Image src={wedding.bride_photo_url || "/images/prewed-bride.png"} alt={wedding.bride_name} fill className="object-cover" />
+                    <Image src={wedding.bride_photo_url || "/images/prewed-bride.png"} alt={wedding.bride_name} fill sizes="(max-width: 640px) 160px, 208px" className="object-cover" />
                   </div>
                 </div>
                 <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#333] mb-2 relative z-20">{wedding.bride_name}</h3>
                 <p className="text-[#8B5E5E] text-[10px] sm:text-xs tracking-widest uppercase mb-2 sm:mb-3">Putri Dari</p>
                 <p className="text-[#666] font-serif text-sm sm:text-base lg:text-lg italic max-w-xs">
-                  Bapak Fulan &amp; Ibu Fulanah
+                  {wedding.bride_parents || "Bapak Fulan & Ibu Fulanah"}
                 </p>
               </div>
             </FadeUp>
@@ -345,12 +343,12 @@ export function InvitationContent({
                 <div className="space-y-4 sm:space-y-6 text-[#666] text-xs sm:text-sm relative z-10">
                   <div>
                     <p className="font-medium text-sm sm:text-base text-[#333] mb-1">{formattedDate}</p>
-                    <p>08:00 WIB - Selesai</p>
+                    <p>{wedding.akad_time || "08:00 WIB - Selesai"}</p>
                   </div>
                   <div className="w-10 sm:w-12 h-px bg-[#8B5E5E]/20 mx-auto" />
                   <div>
-                    <p className="font-medium text-sm sm:text-base text-[#333] mb-1">Kediaman Mempelai Wanita</p>
-                    <p className="leading-relaxed">Jl. Contoh Alamat No. 123,<br/>Jakarta Selatan</p>
+                    <p className="font-medium text-sm sm:text-base text-[#333] mb-1">{wedding.akad_location || "Kediaman Mempelai Wanita"}</p>
+                    <p className="leading-relaxed whitespace-pre-wrap">{wedding.akad_address || "Jl. Contoh Alamat No. 123,\nJakarta Selatan"}</p>
                   </div>
                 </div>
               </div>
@@ -367,12 +365,12 @@ export function InvitationContent({
                 <div className="space-y-4 sm:space-y-6 text-white/90 text-xs sm:text-sm relative z-10">
                   <div>
                     <p className="font-medium text-sm sm:text-base text-white mb-1">{formattedDate}</p>
-                    <p>11:00 WIB - Selesai</p>
+                    <p>{wedding.resepsi_time || "11:00 WIB - Selesai"}</p>
                   </div>
                   <div className="w-10 sm:w-12 h-px bg-white/30 mx-auto" />
                   <div>
-                    <p className="font-medium text-sm sm:text-base text-white mb-1">Gedung Pertemuan Utama</p>
-                    <p className="leading-relaxed">Jl. Contoh Alamat No. 123,<br/>Jakarta Selatan</p>
+                    <p className="font-medium text-sm sm:text-base text-white mb-1">{wedding.resepsi_location || "Gedung Pertemuan Utama"}</p>
+                    <p className="leading-relaxed whitespace-pre-wrap">{wedding.resepsi_address || "Jl. Contoh Alamat No. 123,\nJakarta Selatan"}</p>
                   </div>
                 </div>
               </div>
@@ -405,7 +403,7 @@ export function InvitationContent({
                 wedding.gallery_urls.slice(0, 8).map((url, i) => (
                   <FadeUp key={i} delay={i * 0.1}>
                     <div className={`relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-white ${i % 2 === 0 ? "mt-4 sm:mt-6" : ""}`}>
-                      <Image src={url} alt={`Gallery ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-700" />
+                      <Image src={url} alt={`Gallery ${i + 1}`} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover hover:scale-105 transition-transform duration-700" />
                     </div>
                   </FadeUp>
                 ))
@@ -413,12 +411,12 @@ export function InvitationContent({
                 <>
                   <FadeUp>
                     <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-white mt-4 sm:mt-6">
-                      <Image src="/images/prewed-gallery1.png" alt="Gallery 1" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+                      <Image src="/images/prewed-gallery1.png" alt="Gallery 1" fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover hover:scale-105 transition-transform duration-700" />
                     </div>
                   </FadeUp>
                   <FadeUp delay={0.1}>
                     <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-white">
-                      <Image src="/images/prewed-gallery2.png" alt="Gallery 2" fill className="object-cover hover:scale-105 transition-transform duration-700" />
+                      <Image src="/images/prewed-gallery2.png" alt="Gallery 2" fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover hover:scale-105 transition-transform duration-700" />
                     </div>
                   </FadeUp>
                 </>
@@ -514,7 +512,7 @@ export function InvitationContent({
         {/* ── FOOTER ── */}
         <footer className="py-12 sm:py-16 text-center bg-[#E8E1D5] text-[#333] border-t border-[#8B5E5E]/10 relative overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 sm:w-48 sm:h-24 opacity-50 sm:opacity-60 rotate-180 -translate-y-8 sm:-translate-y-12">
-            <Image src="/images/floral-divider-transparent.png" alt="" fill className="object-contain" />
+            <Image src="/images/floral-divider-transparent.png" alt="" fill sizes="(max-width: 640px) 128px, 192px" className="object-contain" />
           </div>
 
           <p className="font-serif text-2xl sm:text-3xl mb-3 sm:mb-4 mt-6 sm:mt-8 italic text-[#8B5E5E]">

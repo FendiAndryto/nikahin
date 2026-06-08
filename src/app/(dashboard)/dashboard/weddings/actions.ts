@@ -15,6 +15,19 @@ export async function createWedding(data: WeddingFormData) {
     return { error: "Anda harus login terlebih dahulu" };
   }
 
+  // Check account type limit
+  const accountType = user.user_metadata?.account_type || "personal";
+  if (accountType === "personal") {
+    const { data: userWeddings } = await supabase
+      .from("weddings")
+      .select("id")
+      .eq("user_id", user.id);
+
+    if (userWeddings && userWeddings.length >= 1) {
+      return { error: "Akun personal hanya dapat membuat 1 acara undangan. Upgrade ke akun WO untuk membuat lebih banyak acara." };
+    }
+  }
+
   // Check slug uniqueness
   const { data: existing } = await supabase
     .from("weddings")
@@ -38,6 +51,15 @@ export async function createWedding(data: WeddingFormData) {
     groom_photo_url: data.groomPhotoUrl || null,
     bride_photo_url: data.bridePhotoUrl || null,
     music_url: data.musicUrl || null,
+    quote: data.quote || null,
+    groom_parents: data.groomParents || null,
+    bride_parents: data.brideParents || null,
+    akad_time: data.akadTime || null,
+    akad_location: data.akadLocation || null,
+    akad_address: data.akadAddress || null,
+    resepsi_time: data.resepsiTime || null,
+    resepsi_location: data.resepsiLocation || null,
+    resepsi_address: data.resepsiAddress || null,
   });
 
   if (error) {
@@ -84,6 +106,15 @@ export async function updateWedding(id: string, data: WeddingFormData) {
       groom_photo_url: data.groomPhotoUrl || null,
       bride_photo_url: data.bridePhotoUrl || null,
       music_url: data.musicUrl || null,
+      quote: data.quote || null,
+      groom_parents: data.groomParents || null,
+      bride_parents: data.brideParents || null,
+      akad_time: data.akadTime || null,
+      akad_location: data.akadLocation || null,
+      akad_address: data.akadAddress || null,
+      resepsi_time: data.resepsiTime || null,
+      resepsi_location: data.resepsiLocation || null,
+      resepsi_address: data.resepsiAddress || null,
     })
     .eq("id", id)
     .eq("user_id", user.id);

@@ -23,6 +23,15 @@ export const weddingFormSchema = z.object({
   groomPhotoUrl: z.string().optional(),
   bridePhotoUrl: z.string().optional(),
   musicUrl: z.string().optional(),
+  quote: z.string().optional(),
+  groomParents: z.string().optional(),
+  brideParents: z.string().optional(),
+  akadTime: z.string().optional(),
+  akadLocation: z.string().optional(),
+  akadAddress: z.string().optional(),
+  resepsiTime: z.string().optional(),
+  resepsiLocation: z.string().optional(),
+  resepsiAddress: z.string().optional(),
 });
 
 export type WeddingFormData = z.infer<typeof weddingFormSchema>;
@@ -41,6 +50,16 @@ export interface Wedding {
   groom_photo_url: string | null;
   bride_photo_url: string | null;
   music_url: string | null;
+  quote: string | null;
+  groom_parents: string | null;
+  bride_parents: string | null;
+  akad_time: string | null;
+  akad_location: string | null;
+  akad_address: string | null;
+  resepsi_time: string | null;
+  resepsi_location: string | null;
+  resepsi_address: string | null;
   created_at: string;
   updated_at: string;
 }
+

@@ -26,6 +26,9 @@ export const registerSchema = z
     confirmPassword: z
       .string()
       .min(1, "Konfirmasi password wajib diisi"),
+    accountType: z.enum(["personal", "wo"], {
+      message: "Pilih jenis akun",
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password tidak cocok",

@@ -34,6 +34,7 @@ export function RegisterForm() {
       fullName: data.fullName,
       email: data.email,
       password: data.password,
+      accountType: data.accountType,
     });
     if (result?.error) {
       setServerError(result.error);
@@ -90,6 +91,49 @@ export function RegisterForm() {
             {serverError}
           </motion.div>
         )}
+
+        <div className="space-y-3">
+          <Label className="text-sm font-medium">Tujuan Akun</Label>
+          <div className="grid grid-cols-2 gap-4">
+            <label className="cursor-pointer">
+              <input
+                type="radio"
+                value="personal"
+                className="peer sr-only"
+                {...register("accountType")}
+              />
+              <div className="rounded-xl border-2 border-muted bg-popover p-4 hover:bg-accent peer-checked:border-pink-500 peer-checked:bg-pink-500/10">
+                <div className="font-semibold text-foreground">Personal</div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  1 acara undangan
+                </div>
+              </div>
+            </label>
+            <label className="cursor-pointer">
+              <input
+                type="radio"
+                value="wo"
+                className="peer sr-only"
+                {...register("accountType")}
+              />
+              <div className="rounded-xl border-2 border-muted bg-popover p-4 hover:bg-accent peer-checked:border-pink-500 peer-checked:bg-pink-500/10">
+                <div className="font-semibold text-foreground">Wedding Organizer</div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  Kelola banyak acara
+                </div>
+              </div>
+            </label>
+          </div>
+          {errors.accountType && (
+            <motion.p
+              className="text-sm text-destructive"
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {errors.accountType.message}
+            </motion.p>
+          )}
+        </div>
 
         <div className="space-y-2">
           <Label htmlFor="fullName" className="text-sm font-medium">

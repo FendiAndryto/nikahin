@@ -24,6 +24,7 @@ export async function register(formData: {
   fullName: string;
   email: string;
   password: string;
+  accountType: "personal" | "wo";
 }) {
   const supabase = await createClient();
 
@@ -33,6 +34,7 @@ export async function register(formData: {
     options: {
       data: {
         full_name: formData.fullName,
+        account_type: formData.accountType,
       },
     },
   });
