@@ -1,0 +1,17 @@
+name: Auto Deploy Nikahin App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Tarik Code & Build Docker Ulang
+        run: |
+          cd /home/fendi/nikahin
+          git pull origin main
+          docker compose down
+          docker compose up -d --build
