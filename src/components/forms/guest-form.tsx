@@ -146,7 +146,7 @@ export function GuestFormDialog({
             <p className="text-xs text-muted-foreground">
               Link undangan:{" "}
               <span className="font-medium">
-                nikahin.com/{weddingSlug}?to={watchSlug || "slug-tamu"}
+                nikahin.homever.my.id/{weddingSlug}?to={watchSlug || "slug-tamu"}
               </span>
             </p>
             {errors.slug && (

@@ -327,7 +327,7 @@ export function GuestTable({ guests, weddingId, weddingSlug }: GuestTableProps) 
                             <Button
                               variant="ghost"
                               size="icon-sm"
-                              className="opacity-0 group-hover:opacity-100 transition-opacity"
+                              className="text-muted-foreground hover:text-foreground transition-colors"
                             />
                           }
                         >

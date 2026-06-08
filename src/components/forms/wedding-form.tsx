@@ -38,6 +38,20 @@ import {
 } from "@/app/(dashboard)/dashboard/weddings/actions";
 import { slugify } from "@/lib/utils/index";
 
+function getOptimizedUrl(url: string, type: "image" | "video"): string {
+  if (!url || !url.includes("res.cloudinary.com")) return url;
+  const parts = url.split("/upload/");
+  if (parts.length !== 2) return url;
+
+  if (type === "image") {
+    return `${parts[0]}/upload/f_auto,q_auto,c_limit,w_1920/${parts[1]}`;
+  } else if (type === "video") {
+    // Cloudinary treats audio as video resource type
+    return `${parts[0]}/upload/f_auto,q_auto,br_64k/${parts[1]}`;
+  }
+  return url;
+}
+
 interface WeddingFormProps {
   wedding?: Wedding | null;
 }
@@ -193,11 +207,11 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
                 ) : (
                   <CldUploadWidget
                     signatureEndpoint="/api/cloudinary/sign"
-                    options={{ multiple: false, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"] }}
+                    options={{ multiple: false, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"], maxFileSize: 5000000 }}
                     onSuccess={(result) => {
                       document.body.style.overflow = '';
                       if (result.info && typeof result.info === "object" && "secure_url" in result.info) {
-                        setValue("groomPhotoUrl", result.info.secure_url as string, { shouldValidate: true });
+                        setValue("groomPhotoUrl", getOptimizedUrl(result.info.secure_url as string, "image"), { shouldValidate: true });
                       }
                     }}
                     onClose={() => { document.body.style.overflow = ''; }}
@@ -237,11 +251,11 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
                 ) : (
                   <CldUploadWidget
                     signatureEndpoint="/api/cloudinary/sign"
-                    options={{ multiple: false, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"] }}
+                    options={{ multiple: false, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"], maxFileSize: 5000000 }}
                     onSuccess={(result) => {
                       document.body.style.overflow = '';
                       if (result.info && typeof result.info === "object" && "secure_url" in result.info) {
-                        setValue("bridePhotoUrl", result.info.secure_url as string, { shouldValidate: true });
+                        setValue("bridePhotoUrl", getOptimizedUrl(result.info.secure_url as string, "image"), { shouldValidate: true });
                       }
                     }}
                     onClose={() => { document.body.style.overflow = ''; }}
@@ -317,7 +331,7 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground">
-                Link undangan: nikahin.com/<span className="font-medium">{watch("slug") || "slug-anda"}</span>
+                Link undangan: nikahin.homever.my.id/<span className="font-medium">{watch("slug") || "slug-anda"}</span>
               </p>
               {errors.slug && (
                 <p className="text-sm text-destructive">
@@ -467,11 +481,11 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
               ) : (
                 <CldUploadWidget
                   signatureEndpoint="/api/cloudinary/sign"
-                  options={{ multiple: false, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"] }}
+                  options={{ multiple: false, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"], maxFileSize: 5000000 }}
                   onSuccess={(result) => {
                     document.body.style.overflow = '';
                     if (result.info && typeof result.info === "object" && "secure_url" in result.info) {
-                      setValue("coverImageUrl", result.info.secure_url as string, { shouldValidate: true });
+                      setValue("coverImageUrl", getOptimizedUrl(result.info.secure_url as string, "image"), { shouldValidate: true });
                     }
                   }}
                   onClose={() => { document.body.style.overflow = ''; }}
@@ -517,11 +531,11 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
                 ))}
                 <CldUploadWidget
                   signatureEndpoint="/api/cloudinary/sign"
-                  options={{ multiple: true, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"] }}
+                  options={{ multiple: true, clientAllowedFormats: ["jpg", "jpeg", "png", "webp"], maxFileSize: 5000000 }}
                   onSuccess={(result) => {
                     document.body.style.overflow = '';
                     if (result.info && typeof result.info === "object" && "secure_url" in result.info) {
-                      const newGallery = [...(watch("galleryUrls") || []), result.info.secure_url as string];
+                      const newGallery = [...(watch("galleryUrls") || []), getOptimizedUrl(result.info.secure_url as string, "image")];
                       setValue("galleryUrls", newGallery, { shouldValidate: true });
                     }
                   }}
@@ -563,11 +577,11 @@ export function WeddingForm({ wedding }: WeddingFormProps) {
               ) : (
                 <CldUploadWidget
                   signatureEndpoint="/api/cloudinary/sign"
-                  options={{ multiple: false, clientAllowedFormats: ["mp3", "m4a", "wav"], resourceType: "video" }}
+                  options={{ multiple: false, clientAllowedFormats: ["mp3", "m4a", "wav"], resourceType: "video", maxFileSize: 10000000 }}
                   onSuccess={(result) => {
                     document.body.style.overflow = '';
                     if (result.info && typeof result.info === "object" && "secure_url" in result.info) {
-                      setValue("musicUrl", result.info.secure_url as string, { shouldValidate: true });
+                      setValue("musicUrl", getOptimizedUrl(result.info.secure_url as string, "video"), { shouldValidate: true });
                     }
                   }}
                   onClose={() => { document.body.style.overflow = ''; }}

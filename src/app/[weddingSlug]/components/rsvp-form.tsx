@@ -79,106 +79,117 @@ export function RsvpForm({ guest, weddingSlug }: RsvpFormProps) {
     <div className="space-y-6">
       {/* Attendance Selection */}
       <div className="grid grid-cols-2 gap-4">
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => setIsAttending(true)}
-          className={`flex flex-col items-center gap-3 rounded-xl border-2 p-5 transition-all ${
+          className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${
             isAttending === true
-              ? "border-[#8B5E5E] bg-[#8B5E5E]/5"
-              : "border-gray-200 bg-white hover:border-[#8B5E5E]/50 hover:bg-gray-50"
+              ? "border-[#8B5E5E] bg-[#8B5E5E]/10 shadow-inner"
+              : "border-[#8B5E5E]/20 bg-white/40 hover:border-[#8B5E5E]/50 hover:bg-white/60 backdrop-blur-sm"
           }`}
         >
           <CheckCircle2
-            className={`h-8 w-8 ${
-              isAttending === true ? "text-[#8B5E5E]" : "text-gray-400"
+            className={`h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${
+              isAttending === true ? "text-[#8B5E5E]" : "text-[#8B5E5E]/40"
             }`}
           />
           <span
-            className={`text-sm font-medium ${
-              isAttending === true ? "text-[#8B5E5E]" : "text-gray-500"
+            className={`text-sm font-medium tracking-wide ${
+              isAttending === true ? "text-[#8B5E5E]" : "text-[#666]"
             }`}
           >
             Ya, Saya Hadir
           </span>
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => {
             setIsAttending(false);
             setCompanionCount(0);
           }}
-          className={`flex flex-col items-center gap-3 rounded-xl border-2 p-5 transition-all ${
+          className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${
             isAttending === false
-              ? "border-rose-400 bg-rose-50"
-              : "border-gray-200 bg-white hover:border-rose-200 hover:bg-gray-50"
+              ? "border-rose-400 bg-rose-500/10 shadow-inner"
+              : "border-gray-200/50 bg-white/40 hover:border-rose-200 hover:bg-rose-50/50 backdrop-blur-sm"
           }`}
         >
           <XCircle
-            className={`h-8 w-8 ${
+            className={`h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${
               isAttending === false ? "text-rose-500" : "text-gray-400"
             }`}
           />
           <span
-            className={`text-sm font-medium ${
-              isAttending === false ? "text-rose-500" : "text-gray-500"
+            className={`text-sm font-medium tracking-wide ${
+              isAttending === false ? "text-rose-500" : "text-[#666]"
             }`}
           >
             Maaf, Tidak Bisa
           </span>
-        </button>
+        </motion.button>
       </div>
 
       {/* Companion Count */}
       <AnimatePresence>
         {isAttending === true && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="space-y-3 overflow-hidden pt-2"
+            initial={{ opacity: 0, height: 0, y: -10 }}
+            animate={{ opacity: 1, height: "auto", y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -10 }}
+            transition={{ type: "spring", bounce: 0.2 }}
+            className="space-y-4 overflow-hidden pt-2"
           >
-            <label className="flex items-center gap-2 text-sm text-[#666] font-medium">
+            <label className="flex items-center gap-2 text-sm text-[#666] font-medium tracking-wide">
               <Users className="h-4 w-4" />
               Jumlah Pendamping
             </label>
-            <div className="flex items-center gap-4">
-              <button
+            <div className="flex items-center gap-4 bg-white/50 backdrop-blur-md p-2 rounded-2xl border border-[#8B5E5E]/20 w-max mx-auto">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => setCompanionCount(Math.max(0, companionCount - 1))}
-                className="flex h-12 w-12 items-center justify-center rounded-xl border border-gray-200 bg-white text-[#333] hover:bg-gray-50 hover:border-[#8B5E5E]/30 transition-colors"
+                className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#333] hover:text-[#8B5E5E] shadow-sm transition-colors"
               >
                 −
-              </button>
-              <span className="w-8 text-center text-xl font-semibold text-[#8B5E5E]">
+              </motion.button>
+              <span className="w-10 text-center text-xl font-bold text-[#8B5E5E]">
                 {companionCount}
               </span>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => setCompanionCount(Math.min(5, companionCount + 1))}
-                className="flex h-12 w-12 items-center justify-center rounded-xl border border-gray-200 bg-white text-[#333] hover:bg-gray-50 hover:border-[#8B5E5E]/30 transition-colors"
+                className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#333] hover:text-[#8B5E5E] shadow-sm transition-colors"
               >
                 +
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Submit */}
-      <Button
-        onClick={handleSubmit}
-        disabled={isAttending === null || isPending}
-        className="w-full h-14 rounded-xl bg-[#8B5E5E] hover:bg-[#724a4a] text-white border-0 shadow-lg shadow-[#8B5E5E]/20 text-base font-medium tracking-wide"
-      >
-        {isPending ? (
-          <>
-            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            Mengirim...
-          </>
-        ) : (
-          <>
-            <Send className="mr-2 h-5 w-5" />
-            Konfirmasi Kehadiran
-          </>
-        )}
-      </Button>
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="pt-4">
+        <Button
+          onClick={handleSubmit}
+          disabled={isAttending === null || isPending}
+          className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#8B5E5E] to-[#A97C7C] hover:opacity-90 text-white border-0 shadow-xl shadow-[#8B5E5E]/20 text-sm tracking-[0.2em] uppercase font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isPending ? (
+            <>
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              Mengirim...
+            </>
+          ) : (
+            <>
+              <Send className="mr-2 h-5 w-5" />
+              Konfirmasi Kehadiran
+            </>
+          )}
+        </Button>
+      </motion.div>
     </div>
   );
 }

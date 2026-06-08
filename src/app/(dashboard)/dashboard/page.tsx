@@ -144,7 +144,7 @@ export default async function DashboardPage() {
                 <div>
                   <p className="text-xs text-muted-foreground">Link Undangan</p>
                   <p className="text-sm font-medium truncate">
-                    nikahin.com/{activeWedding.slug}
+                    nikahin.homever.my.id/{activeWedding.slug}
                   </p>
                 </div>
               </div>
