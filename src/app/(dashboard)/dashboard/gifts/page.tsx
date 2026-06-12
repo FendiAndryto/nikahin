@@ -17,17 +17,31 @@ export default async function GiftsPage({
   const { wedding: weddingId } = await searchParams;
   const supabase = await createClient();
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user;
 
   if (!user) redirect("/login");
 
-  // Get user's weddings
-  const { data: weddings } = await supabase
+  // If weddingId is in URL, fetch weddings and gifts in parallel
+  const giftsPromise = weddingId 
+    ? supabase
+        .from("gift_accounts")
+        .select("*")
+        .eq("wedding_id", weddingId)
+        .order("created_at", { ascending: true })
+    : Promise.resolve({ data: null });
+
+  const weddingsPromise = supabase
     .from("weddings")
     .select("id, groom_name, bride_name, slug")
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
+
+  const [{ data: weddings }, { data: preFetchedGifts }] = await Promise.all([
+    weddingsPromise,
+    giftsPromise
+  ]);
 
   if (!weddings || weddings.length === 0) {
     return (
@@ -46,16 +60,20 @@ export default async function GiftsPage({
     );
   }
 
-  // Use first wedding if none selected
   const activeWeddingId = weddingId || weddings[0].id;
   const activeWedding = weddings.find((w) => w.id === activeWeddingId) || weddings[0];
 
-  // Fetch gift accounts for selected wedding
-  const { data: giftAccounts } = await supabase
-    .from("gift_accounts")
-    .select("*")
-    .eq("wedding_id", activeWedding.id)
-    .order("created_at", { ascending: true });
+  let giftAccounts = preFetchedGifts;
+
+  // If no weddingId was in URL, fetch gifts sequentially after getting default wedding
+  if (!giftAccounts) {
+    const { data } = await supabase
+      .from("gift_accounts")
+      .select("*")
+      .eq("wedding_id", activeWedding.id)
+      .order("created_at", { ascending: true });
+    giftAccounts = data;
+  }
 
   return (
     <div className="space-y-6">
