@@ -229,6 +229,7 @@ export function LandingContent() {
                         height={500}
                         className="w-full object-cover"
                         priority
+                        fetchPriority="high"
                       />
 
                       {/* Overlay gradient */}
