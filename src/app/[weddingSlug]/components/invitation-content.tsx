@@ -94,7 +94,12 @@ function GlowingOrb({
     "bottom-right": "bottom-0 right-0 translate-x-1/2 translate-y-1/2",
   };
   return (
-    <div className={`absolute w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 rounded-full bg-gradient-to-br from-[#8B5E5E]/20 to-transparent blur-3xl pointer-events-none mix-blend-multiply ${positionClasses[position]} ${className}`} />
+    <div 
+      className={`absolute w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 pointer-events-none opacity-50 ${positionClasses[position]} ${className}`}
+      style={{
+        background: "radial-gradient(circle, rgba(139, 94, 94, 0.15) 0%, rgba(139, 94, 94, 0) 70%)"
+      }}
+    />
   );
 }
 

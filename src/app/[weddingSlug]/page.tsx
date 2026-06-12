@@ -47,32 +47,34 @@ export default async function InvitationPage({
 
   if (!wedding) notFound();
 
-  // Fetch guest (if personalized link)
-  let guest = null;
-  if (guestSlug) {
-    const { data } = await supabase
-      .from("guests")
-      .select("*")
-      .eq("wedding_id", wedding.id)
-      .eq("slug", guestSlug)
-      .single();
-    guest = data;
-  }
+  // Fetch guest, wishes, and gift accounts in parallel
+  const guestPromise = guestSlug
+    ? supabase
+        .from("guests")
+        .select("*")
+        .eq("wedding_id", wedding.id)
+        .eq("slug", guestSlug)
+        .single()
+    : Promise.resolve({ data: null });
 
-  // Fetch wishes
-  const { data: wishes } = await supabase
+  const wishesPromise = supabase
     .from("wishes")
     .select("*")
     .eq("wedding_id", wedding.id)
     .order("created_at", { ascending: false })
     .limit(50);
 
-  // Fetch gift accounts
-  const { data: giftAccounts } = await supabase
+  const giftAccountsPromise = supabase
     .from("gift_accounts")
     .select("*")
     .eq("wedding_id", wedding.id)
     .order("created_at", { ascending: true });
+
+  const [
+    { data: guest },
+    { data: wishes },
+    { data: giftAccounts }
+  ] = await Promise.all([guestPromise, wishesPromise, giftAccountsPromise]);
 
   return (
     <InvitationContent
