@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus, Heart, Calendar, Pencil, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getWeddings } from "./actions";
@@ -26,11 +27,12 @@ export default async function WeddingsPage() {
             Kelola acara pernikahan Anda di sini
           </p>
         </div>
-        <Link href="/dashboard/weddings/new">
-          <Button className="gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-md shadow-pink-500/20">
-            <Plus className="h-4 w-4" />
-            Buat Acara Baru
-          </Button>
+        <Link 
+          href="/dashboard/weddings/new"
+          className={cn(buttonVariants(), "gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-md shadow-pink-500/20")}
+        >
+          <Plus className="h-4 w-4" />
+          Buat Acara Baru
         </Link>
       </div>
 
@@ -51,11 +53,12 @@ export default async function WeddingsPage() {
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">
               Mulai buat acara pernikahan pertama Anda dan bagikan undangan digital ke tamu-tamu Anda.
             </p>
-            <Link href="/dashboard/weddings/new" className="mt-6">
-              <Button className="gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0">
-                <Plus className="h-4 w-4" />
-                Buat Acara Pertama
-              </Button>
+            <Link 
+              href="/dashboard/weddings/new" 
+              className={cn(buttonVariants(), "mt-6 gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0")}
+            >
+              <Plus className="h-4 w-4" />
+              Buat Acara Pertama
             </Link>
           </CardContent>
         </Card>
@@ -97,11 +100,12 @@ export default async function WeddingsPage() {
 
                 {/* Actions */}
                 <div className="mt-4 flex gap-2">
-                  <Link href={`/dashboard/weddings/${wedding.id}/edit`} className="flex-1">
-                    <Button variant="outline" size="sm" className="w-full gap-1.5">
-                      <Pencil className="h-3.5 w-3.5" />
-                      Edit
-                    </Button>
+                  <Link 
+                    href={`/dashboard/weddings/${wedding.id}/edit`} 
+                    className={cn(buttonVariants({ variant: "outline", size: "sm" }), "flex-1 w-full gap-1.5")}
+                  >
+                    <Pencil className="h-3.5 w-3.5" />
+                    Edit
                   </Link>
                   <DeleteWeddingButton weddingId={wedding.id} weddingName={`${wedding.groom_name} & ${wedding.bride_name}`} />
                 </div>

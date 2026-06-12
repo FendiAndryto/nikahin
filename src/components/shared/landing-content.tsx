@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, Sparkles, Users, Send, Star, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   FadeInUp,
   FadeIn,
@@ -163,22 +164,27 @@ export function LandingContent() {
 
               <FadeInUp delay={0.5}>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
-                  <Link href="/register">
-                    <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                      <Button size="lg" className="gap-2 px-8 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-lg shadow-pink-500/25">
-                        <Heart className="h-4 w-4" />
-                        Buat Undangan Gratis
-                        <ChevronRight className="h-4 w-4" />
-                      </Button>
-                    </motion.div>
-                  </Link>
-                  <Link href="/login">
-                    <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                      <Button variant="outline" size="lg" className="px-8">
-                        Masuk ke Akun
-                      </Button>
-                    </motion.div>
-                  </Link>
+                  <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                    <Link 
+                      href="/register"
+                      className={cn(
+                        buttonVariants({ size: "lg" }),
+                        "gap-2 px-8 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-lg shadow-pink-500/25"
+                      )}
+                    >
+                      <Heart className="h-4 w-4" />
+                      Buat Undangan Gratis
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                    <Link 
+                      href="/login"
+                      className={cn(buttonVariants({ variant: "outline", size: "lg" }), "px-8")}
+                    >
+                      Masuk ke Akun
+                    </Link>
+                  </motion.div>
                 </div>
               </FadeInUp>
 
@@ -322,21 +328,22 @@ export function LandingContent() {
             </p>
 
             <div className="mt-8">
-              <Link href="/register">
-                <motion.div
-                  className="inline-block"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
+              <motion.div
+                className="inline-block"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Link 
+                  href="/register"
+                  className={cn(
+                    buttonVariants({ size: "lg" }),
+                    "gap-2 px-10 py-6 text-base bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-xl shadow-pink-500/25"
+                  )}
                 >
-                  <Button
-                    size="lg"
-                    className="gap-2 px-10 py-6 text-base bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-xl shadow-pink-500/25"
-                  >
-                    <Sparkles className="h-5 w-5" />
-                    Mulai Sekarang — Gratis!
-                  </Button>
-                </motion.div>
-              </Link>
+                  <Sparkles className="h-5 w-5" />
+                  Mulai Sekarang — Gratis!
+                </Link>
+              </motion.div>
             </div>
           </div>
         </ScaleIn>

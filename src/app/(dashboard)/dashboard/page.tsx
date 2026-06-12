@@ -11,7 +11,8 @@ import {
   ExternalLink,
   Sparkles,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -151,16 +152,18 @@ export default async function DashboardPage() {
             </div>
 
             <div className="flex gap-3">
-              <Link href={`/dashboard/weddings/${activeWedding.id}/edit`}>
-                <Button variant="outline" size="sm" className="gap-1.5">
-                  Edit Acara
-                </Button>
+              <Link 
+                href={`/dashboard/weddings/${activeWedding.id}/edit`}
+                className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-1.5")}
+              >
+                Edit Acara
               </Link>
-              <Link href="/dashboard/weddings">
-                <Button variant="ghost" size="sm" className="gap-1.5">
-                  Lihat Semua
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Button>
+              <Link 
+                href="/dashboard/weddings"
+                className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-1.5")}
+              >
+                Lihat Semua
+                <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
           </CardContent>
@@ -175,11 +178,12 @@ export default async function DashboardPage() {
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">
               Buat acara pernikahan pertama Anda dan mulai bagikan undangan digital.
             </p>
-            <Link href="/dashboard/weddings/new" className="mt-6">
-              <Button className="gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-md shadow-pink-500/20">
-                <Plus className="h-4 w-4" />
-                Buat Acara Pertama
-              </Button>
+            <Link 
+              href="/dashboard/weddings/new" 
+              className={cn(buttonVariants(), "mt-6 gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-md shadow-pink-500/20")}
+            >
+              <Plus className="h-4 w-4" />
+              Buat Acara Pertama
             </Link>
           </CardContent>
         </Card>

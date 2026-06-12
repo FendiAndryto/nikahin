@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { LandingContent } from "@/components/shared/landing-content";
 
 export default function HomePage() {
@@ -18,18 +19,17 @@ export default function HomePage() {
           </Link>
 
           <div className="flex items-center gap-2">
-            <Link href="/login">
-              <Button variant="ghost" size="sm">
-                Masuk
-              </Button>
+            <Link href="/login" className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}>
+              Masuk
             </Link>
-            <Link href="/register">
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-md shadow-pink-500/20"
-              >
-                Mulai Gratis
-              </Button>
+            <Link 
+              href="/register" 
+              className={cn(
+                buttonVariants({ size: "sm" }), 
+                "bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white border-0 shadow-md shadow-pink-500/20"
+              )}
+            >
+              Mulai Gratis
             </Link>
           </div>
         </div>

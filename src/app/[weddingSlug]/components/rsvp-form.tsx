@@ -83,21 +83,18 @@ export function RsvpForm({ guest, weddingSlug }: RsvpFormProps) {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => setIsAttending(true)}
-          className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${
-            isAttending === true
+          className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${isAttending === true
               ? "border-[#8B5E5E] bg-[#8B5E5E]/10 shadow-inner"
               : "border-[#8B5E5E]/20 bg-white/50 hover:border-[#8B5E5E]/50 hover:bg-white/70"
-          }`}
+            }`}
         >
           <CheckCircle2
-            className={`h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${
-              isAttending === true ? "text-[#8B5E5E]" : "text-[#8B5E5E]/40"
-            }`}
+            className={`h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${isAttending === true ? "text-[#8B5E5E]" : "text-[#8B5E5E]/40"
+              }`}
           />
           <span
-            className={`text-sm font-medium tracking-wide ${
-              isAttending === true ? "text-[#8B5E5E]" : "text-[#666]"
-            }`}
+            className={`text-sm font-medium tracking-wide ${isAttending === true ? "text-[#8B5E5E]" : "text-[#666]"
+              }`}
           >
             Ya, Saya Hadir
           </span>
@@ -110,21 +107,18 @@ export function RsvpForm({ guest, weddingSlug }: RsvpFormProps) {
             setIsAttending(false);
             setCompanionCount(0);
           }}
-          className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${
-            isAttending === false
+          className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${isAttending === false
               ? "border-rose-400 bg-rose-500/10 shadow-inner"
               : "border-gray-200/50 bg-white/50 hover:border-rose-200 hover:bg-rose-50/50"
-          }`}
+            }`}
         >
           <XCircle
-            className={`h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${
-              isAttending === false ? "text-rose-500" : "text-gray-400"
-            }`}
+            className={`h-8 w-8 transition-transform duration-300 group-hover:scale-110 ${isAttending === false ? "text-rose-500" : "text-gray-400"
+              }`}
           />
           <span
-            className={`text-sm font-medium tracking-wide ${
-              isAttending === false ? "text-rose-500" : "text-[#666]"
-            }`}
+            className={`text-sm font-medium tracking-wide ${isAttending === false ? "text-rose-500" : "text-[#666]"
+              }`}
           >
             Maaf, Tidak Bisa
           </span>
