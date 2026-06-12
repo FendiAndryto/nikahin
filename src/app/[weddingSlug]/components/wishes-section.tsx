@@ -105,7 +105,7 @@ export function WishesSection({
             placeholder="Nama Anda"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="pl-12 h-14 bg-white/40 backdrop-blur-md border border-[#8B5E5E]/20 shadow-sm text-[#333] placeholder:text-[#8B5E5E]/50 focus-visible:ring-[#8B5E5E]/50 rounded-2xl transition-all hover:bg-white/60 focus:bg-white"
+            className="pl-12 h-14 bg-white/60 border border-[#8B5E5E]/20 shadow-sm text-[#333] placeholder:text-[#8B5E5E]/50 focus-visible:ring-[#8B5E5E]/50 rounded-2xl transition-all hover:bg-white/80 focus:bg-white"
             disabled={isPending}
           />
         </div>
@@ -113,7 +113,7 @@ export function WishesSection({
           placeholder="Tulis ucapan untuk mempelai..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="min-h-[120px] p-5 bg-white/40 backdrop-blur-md border border-[#8B5E5E]/20 shadow-sm text-[#333] placeholder:text-[#8B5E5E]/50 focus-visible:ring-[#8B5E5E]/50 resize-none rounded-2xl transition-all hover:bg-white/60 focus:bg-white leading-relaxed"
+          className="min-h-[120px] p-5 bg-white/60 border border-[#8B5E5E]/20 shadow-sm text-[#333] placeholder:text-[#8B5E5E]/50 focus-visible:ring-[#8B5E5E]/50 resize-none rounded-2xl transition-all hover:bg-white/80 focus:bg-white leading-relaxed"
           disabled={isPending}
         />
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -143,7 +143,7 @@ export function WishesSection({
         className="max-h-[600px] space-y-4 overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-[#8B5E5E]/30 scrollbar-track-transparent rounded-2xl p-1"
       >
         {wishes.length === 0 ? (
-          <div className="py-16 text-center bg-white/30 backdrop-blur-sm rounded-3xl border border-[#8B5E5E]/10">
+          <div className="py-16 text-center bg-white/40 rounded-3xl border border-[#8B5E5E]/10">
             <MessageCircle className="mx-auto h-16 w-16 text-[#8B5E5E]/30 mb-4 animate-bounce" />
             <p className="text-[#8B5E5E]/70 font-medium tracking-wide">
               Jadilah yang pertama mengirim ucapan!
@@ -157,8 +157,8 @@ export function WishesSection({
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                transition={{ duration: 0.4, type: "spring", bounce: 0.3, delay: i * 0.05 }}
-                className="group rounded-3xl border border-white/60 bg-white/40 backdrop-blur-xl p-6 shadow-xl hover:shadow-2xl transition-shadow duration-500"
+                transition={{ duration: 0.3, type: "spring", bounce: 0.3 }}
+                className="group rounded-3xl border border-white/60 bg-white/60 p-6 shadow-xl hover:shadow-2xl transition-shadow duration-500"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8B5E5E] to-[#A97C7C] text-lg font-bold text-white shadow-md group-hover:scale-110 transition-transform duration-500">

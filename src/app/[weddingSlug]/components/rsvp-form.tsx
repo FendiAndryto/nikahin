@@ -86,7 +86,7 @@ export function RsvpForm({ guest, weddingSlug }: RsvpFormProps) {
           className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${
             isAttending === true
               ? "border-[#8B5E5E] bg-[#8B5E5E]/10 shadow-inner"
-              : "border-[#8B5E5E]/20 bg-white/40 hover:border-[#8B5E5E]/50 hover:bg-white/60 backdrop-blur-sm"
+              : "border-[#8B5E5E]/20 bg-white/50 hover:border-[#8B5E5E]/50 hover:bg-white/70"
           }`}
         >
           <CheckCircle2
@@ -113,7 +113,7 @@ export function RsvpForm({ guest, weddingSlug }: RsvpFormProps) {
           className={`group flex flex-col items-center gap-3 rounded-2xl border-2 p-5 transition-all duration-300 ${
             isAttending === false
               ? "border-rose-400 bg-rose-500/10 shadow-inner"
-              : "border-gray-200/50 bg-white/40 hover:border-rose-200 hover:bg-rose-50/50 backdrop-blur-sm"
+              : "border-gray-200/50 bg-white/50 hover:border-rose-200 hover:bg-rose-50/50"
           }`}
         >
           <XCircle
@@ -145,7 +145,7 @@ export function RsvpForm({ guest, weddingSlug }: RsvpFormProps) {
               <Users className="h-4 w-4" />
               Jumlah Pendamping
             </label>
-            <div className="flex items-center gap-4 bg-white/50 backdrop-blur-md p-2 rounded-2xl border border-[#8B5E5E]/20 w-max mx-auto">
+            <div className="flex items-center gap-4 bg-white/60 p-2 rounded-2xl border border-[#8B5E5E]/20 w-max mx-auto">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}

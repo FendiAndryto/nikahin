@@ -112,9 +112,9 @@ export function LandingContent() {
       <section className="relative overflow-hidden">
         {/* Background Gradient Orbs */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-pink-200/40 via-rose-200/30 to-transparent blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-violet-200/30 via-purple-200/20 to-transparent blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-gradient-to-b from-amber-100/20 to-transparent blur-3xl" />
+          <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full" style={{ background: "radial-gradient(circle, rgba(251, 182, 206, 0.3) 0%, transparent 70%)" }} />
+          <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full" style={{ background: "radial-gradient(circle, rgba(196, 181, 253, 0.2) 0%, transparent 70%)" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(253, 230, 138, 0.15) 0%, transparent 70%)" }} />
         </div>
 
         <FloatingParticles />
@@ -208,7 +208,7 @@ export function LandingContent() {
                 <Float duration={4} distance={8}>
                   <div className="relative">
                     {/* Glow behind image */}
-                    <div className="absolute inset-4 rounded-3xl bg-gradient-to-br from-pink-400/30 via-rose-300/20 to-violet-400/30 blur-2xl" />
+                    <div className="absolute inset-4 rounded-3xl" style={{ background: "radial-gradient(circle, rgba(244, 114, 182, 0.2) 0%, rgba(167, 139, 250, 0.15) 50%, transparent 80%)" }} />
 
                     {/* Main image */}
                     <motion.div
@@ -279,7 +279,7 @@ export function LandingContent() {
             {features.map((feature) => (
               <StaggerItem key={feature.title}>
                 <motion.div
-                  className={`group relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-b ${feature.gradient} p-6 backdrop-blur-sm transition-shadow hover:shadow-xl hover:shadow-black/5`}
+                  className={`group relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-b ${feature.gradient} p-6 transition-shadow hover:shadow-xl hover:shadow-black/5`}
                   whileHover={{ y: -4, transition: { type: "spring", stiffness: 300 } }}
                 >
                   <div className={`mb-4 inline-flex rounded-xl bg-background p-3 shadow-sm ${feature.iconColor}`}>
@@ -300,7 +300,7 @@ export function LandingContent() {
       <section className="relative overflow-hidden py-24">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-r from-pink-500/5 via-rose-500/5 to-violet-500/5" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[400px] w-[800px] rounded-full bg-gradient-to-b from-pink-200/20 to-transparent blur-3xl" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[400px] w-[800px] rounded-full" style={{ background: "radial-gradient(circle, rgba(251, 182, 206, 0.15) 0%, transparent 70%)" }} />
         </div>
 
         <ScaleIn>

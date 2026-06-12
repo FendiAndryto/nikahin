@@ -37,31 +37,17 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-// Elegant Text Reveal Animation
+// Elegant Text Reveal — simplified for performance (no per-character motion.span)
 function StaggerText({ text, className = "", delay = 0 }: { text: string; className?: string; delay?: number }) {
   return (
     <motion.div
       className={className}
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      variants={{
-        visible: { transition: { staggerChildren: 0.05, delayChildren: delay } },
-        hidden: {},
-      }}
+      transition={{ duration: 0.8, delay, ease: "easeOut" }}
     >
-      {text.split("").map((char, index) => (
-        <motion.span
-          key={index}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { type: "spring", bounce: 0.4 } },
-          }}
-          className="inline-block"
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
-      ))}
+      {text}
     </motion.div>
   );
 }
@@ -185,13 +171,13 @@ export function InvitationContent({
           >
             {/* MINIMALIST COVER ASSETS */}
             <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none p-4 sm:p-8 overflow-hidden">
-              <GlowingOrb position="top-left" className="!w-[400px] !h-[400px] !opacity-30 mix-blend-normal" />
-              <GlowingOrb position="bottom-right" className="!w-[500px] !h-[500px] !opacity-30 mix-blend-normal" />
+              <GlowingOrb position="top-left" className="!opacity-30" />
+              <GlowingOrb position="bottom-right" className="!opacity-30" />
 
               
               <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-3xl h-[85vh] sm:h-[90vh]">
                 {/* Clean Arch Frame without Florals */}
-                <div className="absolute inset-4 sm:inset-6 border-[1px] border-[#8B5E5E]/20 rounded-t-[150px] sm:rounded-t-[250px] lg:rounded-t-[300px] shadow-inner bg-white/20 backdrop-blur-[2px]" />
+                <div className="absolute inset-4 sm:inset-6 border-[1px] border-[#8B5E5E]/20 rounded-t-[150px] sm:rounded-t-[250px] lg:rounded-t-[300px] shadow-inner bg-white/20" />
                 <div className="absolute inset-6 sm:inset-8 border-[0.5px] border-[#8B5E5E]/10 rounded-t-[150px] sm:rounded-t-[250px] lg:rounded-t-[300px]" />
               </div>
             </div>
@@ -221,9 +207,7 @@ export function InvitationContent({
               <FadeUp delay={1.8}>
                 <div className="text-center w-full flex flex-col items-center">
                   {guest && (
-                    <div className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-[2rem] bg-white/40 backdrop-blur-xl shadow-2xl border border-white/60 relative overflow-hidden transform hover:scale-105 transition-transform duration-500">
-                      <GlowingOrb position="top-left" className="!opacity-50" />
-                      <GlowingOrb position="bottom-right" className="!opacity-50" />
+                    <div className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-[2rem] bg-white/50 shadow-2xl border border-white/60 relative overflow-hidden transform hover:scale-105 transition-transform duration-500">
                       <p className="text-[10px] sm:text-xs text-[#8B5E5E] uppercase tracking-[0.3em] mb-3 font-semibold relative z-10">
                         Kepada Yth.
                       </p>
@@ -315,8 +299,8 @@ export function InvitationContent({
 
         {/* ── MEMPELAI SECTION ── */}
         <section className="py-16 px-4 sm:py-24 sm:px-8 lg:px-16 bg-[#EBE7DF] relative overflow-hidden">
-          <GlowingOrb position="top-right" className="!opacity-20" />
-          <GlowingOrb position="bottom-left" className="!opacity-20" />
+          <GlowingOrb position="top-right" />
+          <GlowingOrb position="bottom-left" />
 
           <FadeUp>
             <div className="text-center mb-12 sm:mb-16 lg:mb-20 relative z-10">
@@ -380,8 +364,8 @@ export function InvitationContent({
         {/* ── EVENT DETAILS SECTION ── */}
         <section className="py-16 px-4 sm:py-24 sm:px-8 lg:px-16 relative overflow-hidden bg-[#F5F2ED]">
 
-          <GlowingOrb position="bottom-left" className="!opacity-25" />
-          <GlowingOrb position="top-right" className="!opacity-25" />
+          <GlowingOrb position="bottom-left" />
+          <GlowingOrb position="top-right" />
 
           <FadeUp>
             <div className="text-center mb-10 sm:mb-16 relative z-10">
@@ -395,9 +379,7 @@ export function InvitationContent({
 
             {/* Akad Nikah */}
             <FadeUp>
-              <motion.div whileHover={{ y: -10 }} className="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-2xl shadow-black/5 border border-white relative overflow-hidden flex flex-col items-center text-center h-full">
-                <GlowingOrb position="top-left" className="!opacity-40" />
-                <GlowingOrb position="bottom-right" className="!opacity-40" />
+              <motion.div whileHover={{ y: -10 }} className="bg-white/80 rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-2xl shadow-black/5 border border-white relative overflow-hidden flex flex-col items-center text-center h-full">
                 <div className="absolute inset-2 border border-[#8B5E5E]/15 rounded-xl sm:rounded-[1.5rem] pointer-events-none" />
 
                 <h3 className="font-serif text-3xl sm:text-4xl text-[#8B5E5E] mb-4 sm:mb-6 mt-2 sm:mt-4 relative z-10">Akad Nikah</h3>
@@ -418,8 +400,7 @@ export function InvitationContent({
             {/* Resepsi */}
             <FadeUp delay={0.2}>
               <motion.div whileHover={{ y: -10 }} className="bg-gradient-to-br from-[#8B5E5E] to-[#724a4a] rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-2xl shadow-[#8B5E5E]/20 relative overflow-hidden flex flex-col items-center text-center text-white h-full border border-white/20">
-                <GlowingOrb position="top-right" className="!opacity-30 mix-blend-screen" />
-                <GlowingOrb position="bottom-left" className="!opacity-30 mix-blend-screen" />
+
                 <div className="absolute inset-2 border border-white/15 rounded-xl sm:rounded-[1.5rem] pointer-events-none" />
 
                 <h3 className="font-serif text-3xl sm:text-4xl text-white mb-4 sm:mb-6 mt-2 sm:mt-4 relative z-10 drop-shadow-md">Resepsi</h3>
@@ -441,7 +422,7 @@ export function InvitationContent({
           {/* Countdown Timer */}
           {eventDate && eventDate.getTime() > Date.now() && (
             <FadeUp delay={0.4}>
-              <motion.div whileHover={{ scale: 1.02 }} className="mt-10 sm:mt-16 max-w-sm sm:max-w-md lg:max-w-lg mx-auto bg-white/40 backdrop-blur-xl shadow-xl rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/60 relative z-10">
+              <motion.div whileHover={{ scale: 1.02 }} className="mt-10 sm:mt-16 max-w-sm sm:max-w-md lg:max-w-lg mx-auto bg-white/60 shadow-xl rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/60 relative z-10">
                 <p className="text-center text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#8B5E5E] font-bold mb-4 sm:mb-6">Menuju Hari Bahagia</p>
                 <CountdownTimer targetDate={eventDate} />
               </motion.div>
@@ -489,7 +470,7 @@ export function InvitationContent({
         {/* ── DIGITAL GIFT SECTION ── */}
         {giftAccounts.length > 0 && (
           <section className="py-16 px-4 sm:py-24 sm:px-8 lg:px-16 bg-[#E8E1D5] relative overflow-hidden">
-            <GlowingOrb position="top-left" className="!opacity-20" />
+
 
             <FadeUp>
               <div className="max-w-sm sm:max-w-md lg:max-w-2xl mx-auto relative z-10 text-center">
@@ -503,7 +484,7 @@ export function InvitationContent({
 
                 <div className={`grid grid-cols-1 gap-4 sm:gap-6 lg:gap-8 ${giftAccounts.length === 1 ? 'max-w-md mx-auto' : 'sm:grid-cols-2'}`}>
                   {giftAccounts.map((account) => (
-                    <motion.div whileHover={{ y: -5 }} key={account.id} className="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 shadow-xl border border-white/60 group relative overflow-hidden">
+                    <motion.div whileHover={{ y: -5 }} key={account.id} className="bg-white/80 rounded-2xl sm:rounded-[2rem] p-6 sm:p-8 shadow-xl border border-white/60 group relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       {account.qris_url && (
                         <div className="mb-4 sm:mb-6 flex justify-center">
@@ -529,7 +510,7 @@ export function InvitationContent({
         {/* ── RSVP SECTION ── */}
         {guest && (
           <section className="py-16 px-4 sm:py-24 sm:px-8 lg:px-16 relative overflow-hidden bg-[#F5F2ED]">
-            <GlowingOrb position="top-right" className="!opacity-25" />
+
 
             <FadeUp>
               <div className="max-w-sm sm:max-w-md lg:max-w-2xl mx-auto relative z-10">
@@ -540,7 +521,7 @@ export function InvitationContent({
                     Kehadiran Anda adalah hadiah terindah bagi kami.
                   </p>
                 </div>
-                <motion.div whileHover={{ y: -5 }} className="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 shadow-2xl border border-white/60">
+                <motion.div whileHover={{ y: -5 }} className="bg-white/80 rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 shadow-2xl border border-white/60">
                   <RsvpForm guest={guest} weddingSlug={wedding.slug} />
                 </motion.div>
               </div>
@@ -559,7 +540,7 @@ export function InvitationContent({
                   Tinggalkan pesan dan doa untuk kedua mempelai.
                 </p>
               </div>
-              <motion.div whileHover={{ y: -5 }} className="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-10 shadow-2xl border border-white/60">
+              <motion.div whileHover={{ y: -5 }} className="bg-white/80 rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-10 shadow-2xl border border-white/60">
                 <WishesSection
                   initialWishes={wishes}
                   weddingId={wedding.id}
@@ -574,8 +555,7 @@ export function InvitationContent({
         {/* ── FOOTER ── */}
         <footer className="py-12 sm:py-16 text-center bg-[#E8E1D5] text-[#333] border-t border-[#8B5E5E]/10 relative overflow-hidden">
 
-          <GlowingOrb position="bottom-left" className="!w-[300px] !h-[300px] !opacity-20" />
-          <GlowingOrb position="bottom-right" className="!w-[300px] !h-[300px] !opacity-20" />
+
           
           <div className="relative z-10">
             <ElegantDivider />
